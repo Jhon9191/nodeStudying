@@ -1,7 +1,20 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const routes = require('./routes');
 const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.CONECTION_STRING, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then((res) => {
+    console.log("Conectado ao mongo!");
+    app.emit("pronto");
+}).catch((err) => {
+    console.log(err);
+})
+
 const {middlewareGlobal} = require('./src/middlewares/middleware');
 
 app.use(express.urlencoded({extended : true}));
