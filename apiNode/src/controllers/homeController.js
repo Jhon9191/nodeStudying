@@ -1,12 +1,8 @@
 exports.paginaInicial = (req, res) => {
-    // req.session.usuario = {nome: "joao", logado : true};
-    // req.flash('info', "ola mundo");
-    // req.flash('info2', "ola mundo2");
-    // req.flash('info3', "ola mundo3");
-    // console.log(req.flash('info'));
-    // console.log(req.flash('info2'));
-    // console.log(req.flash('info3'));
-    res.render('index');
+    res.render('index',{
+        // titulo: "Titulo",
+        numero: [1,2,3,4,5,6,7,8,9]
+    });
     return;
 }
 

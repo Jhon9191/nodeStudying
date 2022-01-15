@@ -1,0 +1,4 @@
+<% Controle de fluxo (if, for, else, else if)%>
+<%= Imprimi escapando caracteres%>
+<%- Imprimi sem escapar caracteres%>
+<%# Comentário%>

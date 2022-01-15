@@ -1,4 +1,5 @@
 exports.middlewareSecundary = (req, res, next) => {
+    res.local.umaVariavelGlobal = "valor da variavel";
     console.log('Passei no middleware secundary');
     next();
 };
