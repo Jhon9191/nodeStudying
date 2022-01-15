@@ -9,16 +9,33 @@ mongoose.connect(process.env.CONECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then((res) => {
-    console.log("Conectado ao mongo!");
     app.emit("pronto");
 }).catch((err) => {
     console.log(err);
 })
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
+
 const {middlewareGlobal} = require('./src/middlewares/middleware');
 
 app.use(express.urlencoded({extended : true}));
 app.use(express.static(path.resolve(__dirname, 'public')));
+
+const sessionOpitions = session({
+    secret: "dji2kdk9nm3ks9jl28db7av3045",
+    store: MongoStore.create({ mongoUrl: process.env.CONECTION_STRING}),
+    resave: false,
+    saveUninitialized: false, 
+    cookie:{
+        maxAge: 1000 * 60 * 60 * 24 *7,
+        httpOnly: true
+    }
+});
+app.use(sessionOpitions);
+app.use(flash());
+
 app.set('views', path.resolve(__dirname, 'src','views'));
 app.set('view engine', 'ejs');
 
