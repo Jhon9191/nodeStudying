@@ -2,3 +2,10 @@
 <%= Imprimi escapando caracteres%>
 <%- Imprimi sem escapar caracteres%>
 <%# Comentário%>
+<%- include('caminhoDoArquivo')%>
+
+<% if(alguma coisa) {%>
+<%= exibi alguma coisa%>
+<% }else{%>
+<%= exibi alguma coisa%>
+<% }%>
