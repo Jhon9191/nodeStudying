@@ -16,6 +16,23 @@ class Login {
         this.user = null;
     }
 
+    async login() {
+        this.validation();
+        if(this.errors.length > 0) return;
+        this.user = await loginModel.findOne({ email: this.body.email });
+    
+        if(!this.user) {
+          this.errors.push('Usuário não existe.');
+          return;
+        }
+    
+        if(!bcrypt.compareSync(this.body.password, this.user.password)) {
+          this.errors.push('Senha inválida');
+          this.user = null;
+          return;
+        }
+      }
+
     async register() {
         this.validation();
         if (this.errors.length > 0) return;
