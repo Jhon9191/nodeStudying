@@ -47,17 +47,23 @@ Contato.prototype.cleanUp = function(){
     }
 }
 
+Contato.prototype.edit = async function(id) {
+    if(typeof id !== 'string') return;
+    this.validation();
+    if(this.errors.length > 0) return;
+    this.contato = await contatoModel.findByIdAndUpdate(id, this.body, { new: true });
+};
+
 Contato.buscaPorId = async function(id) {
     if(typeof id !== 'string') return;
     const contato = await contatoModel.findById(id);
     return contato;
 };
 
-Contato.prototype.edit = async function(id) {
-    if(typeof id !== 'string') return;
-    this.validation();
-    if(this.errors.length > 0) return;
-    this.contato = await contatoModel.findByIdAndUpdate(id, this.body, { new: true });
-  };
+Contato.buscaContatos = async function() {
+    const contatos = await contatoModel.find()
+    .sort({ criadoEm: -1 });
+    return contatos;
+};
 
 module.exports = Contato;
