@@ -5,24 +5,20 @@ class TokenController {
   async store(req, res) {
     const { email = '', password = '' } = req.body;
 
-    // verificao para campos faltando
     if (!email || !password) {
       return res.status(401).json({
         errors: ['Credenciais inválidas'],
       });
     }
 
-    // procura o usuario baseado no email na base de dados
     const user = await User.findOne({ where: { email } });
 
-    // validacao caso o usuario nao exista
     if (!user) {
       return res.status(401).json({
         errors: ['Usuário não existe'],
       });
     }
 
-    // verifica se a senha e valida
     if (!(await user.passwordIsValid(password))) {
       return res.status(401).json({
         errors: ['Senha inválida'],
@@ -34,7 +30,7 @@ class TokenController {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
-    return res.json({ token });
+    return res.json({ token, user: { nome: user.nome, id, email } });
   }
 }
 

@@ -16,6 +16,10 @@ export default async (req, res, next) => {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
     const { id, email } = dados;
 
+    // CASO MUDE INFORMACOES ELE VERIFICA SE OS EMAILS E ID DO USUARIOS
+    // CORRESPONDEM AO USUARIO LOGADO
+    // CASO USUARIO TROQUE SENHA ELE É DESLOGADO DO SITEMA
+
     const user = await User.findOne({
       where: {
         id,
