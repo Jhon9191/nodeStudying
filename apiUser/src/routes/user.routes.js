@@ -9,7 +9,7 @@ router.get('/', UserController.index);
 router.get('/:id', UserController.show);
 
 // ROTAS NECESSARIAS
-router.post('/', UserController.store);
+router.post('/', loginRequired, UserController.store);
 // ROTA UPDATE N DEVE RECEBER ID, POIS NAO QUEREMOS QUE ESTA USUARIO
 // EDITE OUTROS PERFIS, SOMENTE O DELE
 router.put('/ ', loginRequired, UserController.update);
