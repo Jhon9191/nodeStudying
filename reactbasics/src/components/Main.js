@@ -1,11 +1,20 @@
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
 import './Main.css';
+// eslint-disable-next-line import/no-duplicates
 import { FaPlus } from 'react-icons/fa';
+// eslint-disable-next-line import/no-duplicates
+import { FaEdit, FaWindowClose } from 'react-icons/fa';
 
 export default class Main extends Component {
   state = {
     novaTarefa: '',
+    // eslint-disable-next-line react/no-unused-state
+    tarefas: [
+      'Estudar',
+      'Fazer café',
+      'Ler',
+    ],
   };
 
   handleChange = (e) => {
@@ -16,7 +25,7 @@ export default class Main extends Component {
 
   render() {
     // eslint-disable-next-line no-unused-vars
-    const { novaTarefa } = this.state;
+    const { novaTarefa, tarefas } = this.state;
 
     return (
       <div className="main">
@@ -28,6 +37,18 @@ export default class Main extends Component {
             <FaPlus />
           </button>
         </form>
+
+        <ul className="tarefas">
+          {tarefas.map((item) => (
+            <li key={item}>
+              {item}
+              <div>
+                <FaEdit className="edit" />
+                <FaWindowClose className="delete" />
+              </div>
+            </li>
+          ))}
+        </ul>
 
       </div>
     );
