@@ -10,7 +10,6 @@ import { FaEdit, FaWindowClose } from 'react-icons/fa';
 export default class Main extends Component {
   state = {
     novaTarefa: '',
-    // eslint-disable-next-line react/no-unused-state
     tarefas: [],
   };
 
@@ -20,7 +19,6 @@ export default class Main extends Component {
     let { novaTarefa } = this.state;
     novaTarefa = novaTarefa.trim();
 
-    // eslint-disable-next-line no-useless-return
     if (tarefas.indexOf(novaTarefa) !== -1) return;
     const novasTarefas = [...tarefas];
     this.setState({
@@ -32,6 +30,21 @@ export default class Main extends Component {
     this.setState({
       novaTarefa: e.target.value,
     });
+  };
+
+  handleDelete = (e, index) => {
+    const { tarefas } = this.state;
+    const novasTarefas = [...tarefas];
+    novasTarefas.splice(index, 1);
+
+    this.setState({
+      tarefas: [...novasTarefas],
+    });
+  };
+
+  // eslint-disable-next-line react/no-unused-class-component-methods
+  handleEdit = () => {
+
   };
 
   render() {
@@ -50,12 +63,12 @@ export default class Main extends Component {
         </form>
 
         <ul className="tarefas">
-          {tarefas.map((item) => (
+          {tarefas.map((item, index) => (
             <li key={item}>
               {item}
               <span>
-                <FaEdit className="edit" />
-                <FaWindowClose className="delete" />
+                <FaEdit className="edit" onClick={(e) => this.handleEdit(e, index)} />
+                <FaWindowClose onClick={this.handleDelete} className="delete" />
               </span>
             </li>
           ))}
