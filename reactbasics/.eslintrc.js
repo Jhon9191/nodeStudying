@@ -19,7 +19,5 @@ module.exports = {
   ],
   rules: {
     'react/jsx-filename-extension': 'off',
-    'react/state-in-constructor': 0,
-    'no-unused-vars': 0,
   },
 };
