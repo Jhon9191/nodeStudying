@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/state-in-constructor */
 import React, { Component } from 'react';
 import './Main.css';
@@ -10,11 +11,21 @@ export default class Main extends Component {
   state = {
     novaTarefa: '',
     // eslint-disable-next-line react/no-unused-state
-    tarefas: [
-      'Estudar',
-      'Fazer café',
-      'Ler',
-    ],
+    tarefas: [],
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { tarefas } = this.state;
+    let { novaTarefa } = this.state;
+    novaTarefa = novaTarefa.trim();
+
+    // eslint-disable-next-line no-useless-return
+    if (tarefas.indexOf(novaTarefa) !== -1) return;
+    const novasTarefas = [...tarefas];
+    this.setState({
+      tarefas: [...novasTarefas, novaTarefa],
+    });
   };
 
   handleChange = (e) => {
@@ -31,7 +42,7 @@ export default class Main extends Component {
       <div className="main">
 
         <h1>Lista de tarefas</h1>
-        <form action="#" className="form">
+        <form action="#" onSubmit={this.handleSubmit} className="form">
           <input onChange={this.handleChange} type="text" value={novaTarefa} />
           <button type="submit">
             <FaPlus />
@@ -42,10 +53,10 @@ export default class Main extends Component {
           {tarefas.map((item) => (
             <li key={item}>
               {item}
-              <div>
+              <span>
                 <FaEdit className="edit" />
                 <FaWindowClose className="delete" />
-              </div>
+              </span>
             </li>
           ))}
         </ul>
