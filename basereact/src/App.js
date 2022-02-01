@@ -2,15 +2,16 @@
 import Routes from './routes';
 import GlobalStyle from './styles/GlobalStyles';
 import Header from './components/Header';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import History from './services/history';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router history={History}>
       <Header />
       <GlobalStyle />
       <Routes />
-    </BrowserRouter>
+    </Router>
   );
 }
 
