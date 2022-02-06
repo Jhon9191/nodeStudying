@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container } from '../../styles/GlobalStyles';
 import { Paragrafo, Title } from './styled';
-import axios from '../../services/axios';
+import { useDispatch } from 'react-redux';
 
 export default function Login() {
-  useEffect(() => {
-    axios.get('/alunos').then((res) => {
-      console.log(res.data);
+  const dispatch = useDispatch();
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    dispatch({
+      type: 'BOTAO_CLICADO',
     });
-  }, []);
+  };
 
   return (
     <Container>
@@ -17,7 +20,7 @@ export default function Login() {
         <small>oie</small>
       </Title>
       <Paragrafo>Lorem Ips start_describe_definition</Paragrafo>
-      <button>teste</button>
+      <button onClick={handleLogin}>teste</button>
     </Container>
   );
 }
