@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Header() {
-  const botaoClidado = useSelector((state) => state.botaoClidado);
+  const botaoClicado = useSelector((state) => state.example.botaoClicado);
 
   return (
     <Nav>
@@ -19,7 +19,7 @@ export default function Header() {
       <Link to="/404">
         <FaSignInAlt size={24} />
       </Link>
-      {botaoClidado ? 'Clicado' : 'Não clicado'}
+      {botaoClicado ? 'Clicado' : 'Não clicado'}
     </Nav>
   );
 }

@@ -1,22 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-const botaoClidado = {
-  botaoClidado: false,
-};
+import rootReducer from './modules/rootReducer';
+import rootSaga from './modules/rootSagas';
 
-const reducer = (state = botaoClidado, action) => {
-  switch (action.type) {
-    case 'BOTAO_CLICADO': {
-      const newState = { ...state };
-      newState.botaoClidado = !newState.botaoClidado;
-      return newState;
-    }
-    default: {
-      return state;
-    }
-  }
-};
-const store = createStore(reducer);
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
