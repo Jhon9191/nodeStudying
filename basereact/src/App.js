@@ -6,16 +6,19 @@ import { Router } from 'react-router-dom';
 import History from './services/history';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
-import store from './store';
+import store, { persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
 function App() {
   return (
     <Provider store={store}>
-      <Router history={History}>
-        <Header />
-        <GlobalStyle />
-        <Routes />
-        <ToastContainer autoClose={3000} className="toast-container" />
-      </Router>
+      <PersistGate persistor={persistor}>
+        <Router history={History}>
+          <Header />
+          <GlobalStyle />
+          <Routes />
+          <ToastContainer autoClose={3000} className="toast-container" />
+        </Router>
+      </PersistGate>
     </Provider>
   );
 }
